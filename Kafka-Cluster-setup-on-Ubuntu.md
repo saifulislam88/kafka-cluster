@@ -28,7 +28,7 @@ java -version
 swapoff -a
 sudo sed -i '/ swap / s/^/#/' /etc/fstab
 echo 'vm.swappiness=1' | sudo tee --append /etc/sysctl.conf
-cat /etc/sysctl.conf |grep 'swappiness'                                                        #Output "vm.swappiness=1"
+cat /etc/sysctl.conf |grep 'swappiness'                                       #Output "vm.swappiness=1"
 ```
 
 
@@ -38,25 +38,30 @@ cat /etc/sysctl.conf |grep 'swappiness'                                         
 wget https://downloads.apache.org/kafka/3.8.1/kafka_2.13-3.8.1.tgz
 tar -xvf kafka_2.13-3.8.1.tgz
 sudo mv kafka_2.13-3.8.1.tgz /opt/kafka
-sudo mkdir -p /data/kafka                                                                      #create folder to store data
+sudo mkdir -p /data/kafka                                                     #create folder to store data
 ```
 
 ### Create a New Directory for Kafka and Zookeeper
 
-sudo mkdir -p /data/kafka                                                                      #A new directory for Kafka message and logs
-sudo mkdir -p /data/zookeeper                                                                  #It is snapshot and data directory for Zookeeper
+sudo mkdir -p /data/kafka                                                     #A new directory for Kafka message and logs
+sudo mkdir -p /data/zookeeper                                                 #It is snapshot and data directory for Zookeeper
 
 
 ### Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
 
+#`"1"` to specify Kafka-Zookeeper server #1:
 ```sh
-echo "1" > /data/zookeeper/myid                                                                #"1" to specify Kafka-Zookeeper server #1:
+echo "1" > /data/zookeeper/myid                                                                
 ```
+
+#`"2"` to specify Kafka-Zookeeper Server #2:
 ```sh
-echo "2" > /data/zookeeper/myid                                                                #"2" to specify Kafka-Zookeeper Server #2:
+echo "2" > /data/zookeeper/myid                                                                
 ```
+
+#`"3"` to specify Kafka-Zookeeper server #3:
 ```sh
-echo "3" > /data/zookeeper/myid                                                                #"3" to specify Kafka-Zookeeper server #3:
+echo "3" > /data/zookeeper/myid                                                                
 ```
 
 
