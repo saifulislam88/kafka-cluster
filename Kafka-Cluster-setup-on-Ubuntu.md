@@ -43,9 +43,10 @@ sudo mkdir -p /data/kafka                                                     #c
 
 ### Create a New Directory for Kafka and Zookeeper
 
+```sh
 sudo mkdir -p /data/kafka                                                     #A new directory for Kafka message and logs
 sudo mkdir -p /data/zookeeper                                                 #It is snapshot and data directory for Zookeeper
-
+```
 
 ### Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
 
