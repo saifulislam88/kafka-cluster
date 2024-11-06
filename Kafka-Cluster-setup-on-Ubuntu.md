@@ -37,8 +37,7 @@ cat /etc/sysctl.conf |grep 'swappiness'                                       #O
 ```sh
 wget https://downloads.apache.org/kafka/3.8.1/kafka_2.13-3.8.1.tgz
 tar -xvf kafka_2.13-3.8.1.tgz
-sudo mv kafka_2.13-3.8.1.tgz /opt/kafka
-sudo mkdir -p /data/kafka                                                     #create folder to store data
+sudo mv kafka_2.13-3.8.1 /opt/kafka
 ```
 
 ### Create a New Directory for Kafka and Zookeeper
