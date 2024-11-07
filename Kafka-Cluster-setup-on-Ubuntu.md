@@ -177,9 +177,9 @@ exit 0
 
 `chmod +x /etc/rc.local`
 
-🌟**Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using**\
-`systemctl status zookeeper`
+🌟**Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using**
 
+`systemctl status zookeeper`
 
 
 ## 🚀Kafka Configuration
@@ -192,14 +192,14 @@ Use the following command to backup the existing `server.properties` file (in th
 `vim /opt/kafka/config/server.properties`\
 Copy and paste the following into the contents of the `server.properties` and change the `broker.id` and the advertised.listeners:
 
-**⚠️Server:** `1`
+#### **⚠️Server:** `1` | `broker.id=1` | `advertised.listeners=PLAINTEXT://kafka-1:9092` 
 ```sh
 # change this for each broker
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
 broker.id=1    
 # change this to the hostname of each broker
 # example advertised.listeners=PLAINTEXT://kafka-1:9092
-# example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
+# example, hostname -> kafka-1 for server1, hostname -> kafka-2 for server2 and hostname -> kafka-3 for server 3 
 advertised.listeners=PLAINTEXT://kafka-1:9092  
 # The ability to delete topics
 delete.topic.enable=true
@@ -225,14 +225,14 @@ zookeeper.connection.timeout.ms=6000
 auto.create.topics.enable=true
 ```
 
-**⚠️Server:** `2`
+#### **⚠️Server:** `2` | `broker.id=2` | `advertised.listeners=PLAINTEXT://kafka-2:9092` 
 ```sh
 # change this for each broker
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
 broker.id=2    
 # change this to the hostname of each broker
-# example advertised.listeners=PLAINTEXT://kafka-1:9092
-# example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
+# example advertised.listeners=PLAINTEXT://kafka-2:9092
+# example, hostname -> kafka-1 for server1, hostname -> kafka-2 for server2 and hostname -> kafka-3 for server 3 
 advertised.listeners=PLAINTEXT://kafka-1:9092  
 # The ability to delete topics
 delete.topic.enable=true
@@ -258,7 +258,7 @@ zookeeper.connection.timeout.ms=6000
 auto.create.topics.enable=true
 ```
 
-**⚠️Server:** `3`
+#### **⚠️Server:** `3` | `broker.id=3` | `advertised.listeners=PLAINTEXT://kafka-3:9092`  
 ```sh
 # change this for each broker
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
@@ -266,7 +266,7 @@ broker.id=3
 # change this to the hostname of each broker
 # example advertised.listeners=PLAINTEXT://kafka-1:9092
 # example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
-advertised.listeners=PLAINTEXT://kafka-1:9092  
+advertised.listeners=PLAINTEXT://kafka-3:9092  
 # The ability to delete topics
 delete.topic.enable=true
 # Where logs are stored
