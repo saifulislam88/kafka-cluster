@@ -212,7 +212,7 @@ broker.id=2
 # change this to the hostname of each broker
 # example advertised.listeners=PLAINTEXT://kafka-2:9092
 # example, hostname -> kafka-1 for server1, hostname -> kafka-2 for server2 and hostname -> kafka-3 for server 3 
-advertised.listeners=PLAINTEXT://kafka-1:9092  
+advertised.listeners=PLAINTEXT://kafka-2:9092  
 # The ability to delete topics
 delete.topic.enable=true
 # Where logs are stored
@@ -246,7 +246,7 @@ Copy and paste the following into the contents of the `server.properties` and ch
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
 broker.id=3    
 # change this to the hostname of each broker
-# example advertised.listeners=PLAINTEXT://kafka-1:9092
+# example advertised.listeners=PLAINTEXT://kafka-3:9092
 # example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
 advertised.listeners=PLAINTEXT://kafka-3:9092  
 # The ability to delete topics
