@@ -1,7 +1,8 @@
-## Kafka Cluster Setup on Ubuntu with 3 Brokers | Kafka Multi Nodes Cluster Setup
+## 3-Broker Kafka Multi-Node Cluster with Zookeeper on Ubuntu 24
 
-
-
+Pre-requisits
+1.Kafka latest package
+2. Ubuntu VMs(3 nodes)
 
 ### Add custom hostnames to /etc/hosts file
 Since we are creating `3` Ubuntu Servers with custom hostnames for kafka and zookeeper, we are required to add this ip to hostname mapping in `/etc/hosts` file
@@ -47,6 +48,10 @@ sudo mkdir -p /data/kafka                                                     #A
 sudo mkdir -p /data/zookeeper                                                 #It is snapshot and data directory for Zookeeper
 ```
 
+
+
+## Zookeeper Configuration
+
 ### Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
 
 #`"1"` to specify Kafka-Zookeeper server #1:
@@ -65,5 +70,90 @@ echo "3" > /data/zookeeper/myid
 ```
 
 
+### Edit Zookeeper Configuration Files
+
+Use the following command to backup the existing `zookeeper.properties` file (in the config directory) and create a new `zookeeper.properties` file:
+
+`mv /opt/kafka/config/zookeeper.properties /opt/kafka/config/zookeeper.properties_ori-backup-msi`\
+`vim /opt/kafka/config/zookeeper.properties`\
+Copy and paste the following into the contents of the `zookeeper.properties` file (don't change this file):
+
+```sh
+# the directory where the snapshot is stored.
+dataDir=/data/zookeeper
+# the port at which the clients will connect
+clientPort=2181
+# setting number of connections to unlimited
+maxClientCnxns=0
+# keeps a heartbeat of zookeeper in milliseconds
+tickTime=2000
+# time for initial synchronization
+initLimit=10
+# how many ticks can pass before timeout
+syncLimit=5
+# define servers ip or hostname and internal ports to zookeeper
+server.1=zookeeper-1:2888:3888
+server.2=zookeeper-2:2888:3888
+server.3=zookeeper-3:2888:3888
+```
+
+### Create the Zookeeper Service
+
+`vim /etc/init.d/zookeeper`
+
+```sh
+
+#!/bin/bash
+#/etc/init.d/zookeeper
+DAEMON_PATH=/opt/kafka/bin
+DAEMON_NAME=zookeeper
+# Check that networking is up.
+#[ ${NETWORKING} = "no" ] && exit 0
+
+PATH=$PATH:$DAEMON_PATH
+
+case "$1" in
+  start)
+        # Start daemon.
+        pid=`ps ax | grep -i 'org.apache.zookeeper' | grep -v grep | awk '{print $1}'`
+        if [ -n "$pid" ]
+          then
+            echo "Zookeeper is already running";
+        else
+          echo "Starting $DAEMON_NAME";
+          $DAEMON_PATH/zookeeper-server-start.sh -daemon /opt/kafka/config/zookeeper.properties
+        fi
+        ;;
+  stop)
+        echo "Shutting down $DAEMON_NAME";
+        $DAEMON_PATH/zookeeper-server-stop.sh
+        ;;
+  restart)
+        $0 stop
+        sleep 2
+        $0 start
+        ;;
+  status)
+        pid=`ps ax | grep -i 'org.apache.zookeeper' | grep -v grep | awk '{print $1}'`
+        if [ -n "$pid" ]
+          then
+          echo "Zookeeper is Running as PID: $pid"
+        else
+          echo "Zookeeper is not Running"
+        fi
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+exit 0
+```
+
+sudo chmod +x /etc/init.d/zookeeper
+sudo chown root:root /etc/init.d/zookeeper
+sudo update-rc.d zookeeper defaults
+sudo service zookeeper start
+sudo service zookeeper status
 
 
