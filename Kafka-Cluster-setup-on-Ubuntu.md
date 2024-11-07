@@ -174,7 +174,119 @@ systemctl start kafka
 
 exit 0
 ```
+
 `chmod +x /etc/rc.local`
 
-🌟**Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using**
+🌟**Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using**\
 `systemctl status zookeeper`
+
+
+
+## 🚀Kafka Configuration
+
+### 1. 🟡Edit Kafka Configuration Files | All Nodes
+
+Use the following command to backup the existing `server.properties` file (in the config directory) and create a new `server.properties` file:
+
+`mv /opt/kafka/config/server.properties /opt/kafka/config/server.properties_ori-backup-msi`\
+`vim /opt/kafka/config/server.properties`\
+Copy and paste the following into the contents of the `server.properties` and change the `broker.id` and the advertised.listeners:
+
+**⚠️Server:** `1`
+```sh
+# change this for each broker
+# example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
+broker.id=1    
+# change this to the hostname of each broker
+# example advertised.listeners=PLAINTEXT://kafka-1:9092
+# example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
+advertised.listeners=PLAINTEXT://kafka-1:9092  
+# The ability to delete topics
+delete.topic.enable=true
+# Where logs are stored
+log.dirs=/data/kafka
+# default number of partitions
+num.partitions=8
+# default replica count based on the number of brokers
+default.replication.factor=3
+# to protect yourself against broker failure
+min.insync.replicas=2
+# logs will be deleted after how many hours
+log.retention.hours=168
+# size of the log files 
+log.segment.bytes=1073741824
+# check to see if any data needs to be deleted
+log.retention.check.interval.ms=300000
+# location of all zookeeper instances and kafka directory
+zookeeper.connect=zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+# timeout for connecting with zookeeper
+zookeeper.connection.timeout.ms=6000
+# automatically create topics
+auto.create.topics.enable=true
+```
+
+**⚠️Server:** `2`
+```sh
+# change this for each broker
+# example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
+broker.id=2    
+# change this to the hostname of each broker
+# example advertised.listeners=PLAINTEXT://kafka-1:9092
+# example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
+advertised.listeners=PLAINTEXT://kafka-1:9092  
+# The ability to delete topics
+delete.topic.enable=true
+# Where logs are stored
+log.dirs=/data/kafka
+# default number of partitions
+num.partitions=8
+# default replica count based on the number of brokers
+default.replication.factor=3
+# to protect yourself against broker failure
+min.insync.replicas=2
+# logs will be deleted after how many hours
+log.retention.hours=168
+# size of the log files 
+log.segment.bytes=1073741824
+# check to see if any data needs to be deleted
+log.retention.check.interval.ms=300000
+# location of all zookeeper instances and kafka directory
+zookeeper.connect=zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+# timeout for connecting with zookeeper
+zookeeper.connection.timeout.ms=6000
+# automatically create topics
+auto.create.topics.enable=true
+```
+
+**⚠️Server:** `3`
+```sh
+# change this for each broker
+# example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
+broker.id=3    
+# change this to the hostname of each broker
+# example advertised.listeners=PLAINTEXT://kafka-1:9092
+# example, hostname -> kafka1 for server1, hostname -> kafka2 for server2 and hostname -> kafka3 for server 3 
+advertised.listeners=PLAINTEXT://kafka-1:9092  
+# The ability to delete topics
+delete.topic.enable=true
+# Where logs are stored
+log.dirs=/data/kafka
+# default number of partitions
+num.partitions=8
+# default replica count based on the number of brokers
+default.replication.factor=3
+# to protect yourself against broker failure
+min.insync.replicas=2
+# logs will be deleted after how many hours
+log.retention.hours=168
+# size of the log files 
+log.segment.bytes=1073741824
+# check to see if any data needs to be deleted
+log.retention.check.interval.ms=300000
+# location of all zookeeper instances and kafka directory
+zookeeper.connect=zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+# timeout for connecting with zookeeper
+zookeeper.connection.timeout.ms=6000
+# automatically create topics
+auto.create.topics.enable=true
+```
