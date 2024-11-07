@@ -96,7 +96,7 @@ server.2=zookeeper-2:2888:3888
 server.3=zookeeper-3:2888:3888
 ```
 
-### 3. 🟡Create the Zookeeper Service
+### 3. 🟡Create the Zookeeper Service | The `init.d` scripts to start and stop Zookeeper service
 
 `vim /etc/init.d/zookeeper`
 
