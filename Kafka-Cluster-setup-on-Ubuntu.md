@@ -1,11 +1,11 @@
 ## 3-Broker Kafka Multi-Node Cluster with Zookeeper on Ubuntu 24
 
-Pre-requisits
+Pre-requisites
 - Kafka latest package
 - Ubuntu VMs(3 nodes)
 - Root Access
 
-### Add custom hostnames to /etc/hosts file
+### Step🌐1 — Add custom hostnames to /etc/hosts file
 Since we are creating `3` Ubuntu Servers with custom hostnames for kafka and zookeeper, we are required to add this ip to hostname mapping in `/etc/hosts` file
 
 `sudo vim /etc/hosts`
@@ -20,7 +20,7 @@ Since we are creating `3` Ubuntu Servers with custom hostnames for kafka and zoo
 ```
 
 
-### Install latest Java(OpenJDK) and Disable RAM Swap
+### Step🌐2 — Install latest Java(OpenJDK) and Disable RAM Swap
 
 ```sh
 sudo apt update -y
@@ -34,7 +34,7 @@ cat /etc/sysctl.conf |grep 'swappiness'                                       #O
 ```
 
 
-### Download the latest Kafka binaries
+### Step🌐3 — Download the latest Kafka binaries
 
 ```sh
 wget https://downloads.apache.org/kafka/3.8.1/kafka_2.13-3.8.1.tgz
@@ -42,7 +42,7 @@ tar -xvf kafka_2.13-3.8.1.tgz
 sudo mv kafka_2.13-3.8.1 /opt/kafka
 ```
 
-### Create a New Directory for Kafka and Zookeeper
+### Step🌐4 — Create a New Directory for Kafka and Zookeeper
 
 ```sh
 sudo mkdir -p /data/kafka                                                     #A new directory for Kafka message and logs
@@ -50,7 +50,7 @@ sudo mkdir -p /data/zookeeper                                                 #I
 ```
 
 
-## 🚀Zookeeper Configuration
+## Step🌐5 — Zookeeper Configuration
 
 ### 1. 🟡Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
 
@@ -158,7 +158,7 @@ exit 0
 `sudo service zookeeper status` or `systemctl status zookeeper`
 
 
-## 🚀Kafka Configuration
+## Step🌐6 — Kafka Configuration
 
 ### 1. 🟡Edit Kafka Configuration Files | All Nodes
 
@@ -334,7 +334,7 @@ exit 0
 `sudo service kafka status` or `systemctl status kafka`
 
 
-🌟**Create `/etc/rc.local` to run `Kafka` and `Zookeeper` daemon services at boot time**
+### Step🌐7 — **Create `/etc/rc.local` to run `Kafka` and `Zookeeper` daemon services at boot time**
 
 `vim  /etc/rc.local`
 
@@ -361,3 +361,4 @@ exit 0
 `systemctl status zookeeper`
 
 
+### Step🌐8 — Testing the Kafka Installation
