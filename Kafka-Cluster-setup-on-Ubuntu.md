@@ -49,10 +49,9 @@ sudo mkdir -p /data/zookeeper                                                 #I
 ```
 
 
+## 🚀Zookeeper Configuration
 
-## Zookeeper Configuration
-
-### Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
+### 1. 🟡Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
 
 #`"1"` to specify Kafka-Zookeeper server #1:
 ```sh
@@ -70,7 +69,7 @@ echo "3" > /data/zookeeper/myid
 ```
 
 
-### Edit Zookeeper Configuration Files
+### 2. 🟡Edit Zookeeper Configuration Files
 
 Use the following command to backup the existing `zookeeper.properties` file (in the config directory) and create a new `zookeeper.properties` file:
 
@@ -97,7 +96,7 @@ server.2=zookeeper-2:2888:3888
 server.3=zookeeper-3:2888:3888
 ```
 
-### Create the Zookeeper Service
+### 3. 🟡Create the Zookeeper Service
 
 `vim /etc/init.d/zookeeper`
 
@@ -150,10 +149,32 @@ esac
 exit 0
 ```
 
-sudo chmod +x /etc/init.d/zookeeper
-sudo chown root:root /etc/init.d/zookeeper
-sudo update-rc.d zookeeper defaults
-sudo service zookeeper start
-sudo service zookeeper status
+- Change the file to executable, change ownership and start the service
 
+`sudo chmod +x /etc/init.d/zookeeper`
+`sudo chown root:root /etc/init.d/zookeeper`
+`sudo service zookeeper start` or `systemctl start zookeeper`
+`sudo service zookeeper status` or `systemctl status zookeeper`
 
+- 🌟Create `/etc/rc.local` to run `Zookeeper` at boot
+
+`vim  /etc/rc.local`
+
+```sh
+#!/bin/bash
+
+# Start Zookeeper first
+systemctl start zookeeper
+
+# Wait for 10 seconds to allow Zookeeper to fully start
+sleep 10
+
+# Start Kafka after Zookeeper is up
+systemctl start kafka
+
+exit 0
+```
+`chmod +x /etc/rc.local`
+
+- 🌟Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using
+`systemctl status zookeeper`
