@@ -149,7 +149,7 @@ esac
 exit 0
 ```
 
-- Change the file to executable, change ownership and start the service
+🌟**Change the file to executable, change ownership and start the service**
 
 `sudo chmod +x /etc/init.d/zookeeper`\
 `sudo chown root:root /etc/init.d/zookeeper`\
