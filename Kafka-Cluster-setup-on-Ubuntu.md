@@ -1,8 +1,9 @@
 ## 3-Broker Kafka Multi-Node Cluster with Zookeeper on Ubuntu 24
 
 Pre-requisits
-1.Kafka latest package
-2. Ubuntu VMs(3 nodes)
+- Kafka latest package
+- Ubuntu VMs(3 nodes)
+- Root Access
 
 ### Add custom hostnames to /etc/hosts file
 Since we are creating `3` Ubuntu Servers with custom hostnames for kafka and zookeeper, we are required to add this ip to hostname mapping in `/etc/hosts` file
@@ -156,43 +157,18 @@ exit 0
 `sudo service zookeeper start` or `systemctl start zookeeper`\
 `sudo service zookeeper status` or `systemctl status zookeeper`
 
-🌟**Create `/etc/rc.local` to run `Zookeeper` at boot**
-
-`vim  /etc/rc.local`
-
-```sh
-#!/bin/bash
-
-# Start Zookeeper first
-systemctl start zookeeper
-
-# Wait for 10 seconds to allow Zookeeper to fully start
-sleep 10
-
-# Start Kafka after Zookeeper is up
-systemctl start kafka
-
-exit 0
-```
-
-`chmod +x /etc/rc.local`
-
-🌟**Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using**
-
-`systemctl status zookeeper`
-
 
 ## 🚀Kafka Configuration
 
 ### 1. 🟡Edit Kafka Configuration Files | All Nodes
 
-Use the following command to backup the existing `server.properties` file (in the config directory) and create a new `server.properties` file:
-
-`mv /opt/kafka/config/server.properties /opt/kafka/config/server.properties_ori-backup-msi`\
-`vim /opt/kafka/config/server.properties`\
-Copy and paste the following into the contents of the `server.properties` and change the `broker.id` and the advertised.listeners:
+Use the following command to backup the existing `server.properties` file (in the config directory) and create a new `server.properties` file:\
+`mv /opt/kafka/config/server.properties /opt/kafka/config/server.properties_ori-backup-msi`
 
 #### **⚠️Server:** `1` | `broker.id=1` | `advertised.listeners=PLAINTEXT://kafka-1:9092` 
+Copy and paste the following into the contents of the `server.properties` and change the `broker.id` and the advertised.listeners\
+`vim /opt/kafka/config/server.properties`
+
 ```sh
 # change this for each broker
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
@@ -225,7 +201,10 @@ zookeeper.connection.timeout.ms=6000
 auto.create.topics.enable=true
 ```
 
-#### **⚠️Server:** `2` | `broker.id=2` | `advertised.listeners=PLAINTEXT://kafka-2:9092` 
+#### **⚠️Server:** `2` | `broker.id=2` | `advertised.listeners=PLAINTEXT://kafka-2:9092`
+Copy and paste the following into the contents of the `server.properties` and change the `broker.id` and the advertised.listeners\
+`vim /opt/kafka/config/server.properties`
+
 ```sh
 # change this for each broker
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
@@ -258,7 +237,10 @@ zookeeper.connection.timeout.ms=6000
 auto.create.topics.enable=true
 ```
 
-#### **⚠️Server:** `3` | `broker.id=3` | `advertised.listeners=PLAINTEXT://kafka-3:9092`  
+#### **⚠️Server:** `3` | `broker.id=3` | `advertised.listeners=PLAINTEXT://kafka-3:9092`
+Copy and paste the following into the contents of the `server.properties` and change the `broker.id` and the advertised.listeners\
+`vim /opt/kafka/config/server.properties`
+
 ```sh
 # change this for each broker
 # example, broker.id=1 for server1, broker.id=2 for server2 and broker.id=3 for server 3
@@ -290,3 +272,92 @@ zookeeper.connection.timeout.ms=6000
 # automatically create topics
 auto.create.topics.enable=true
 ```
+
+### 2. 🟡Create the Kafka Service | The `init.d` scripts to start and stop Kafka service
+
+`vim /etc/init.d/kafka`
+
+```sh
+#!/bin/bash
+#/etc/init.d/kafka
+DAEMON_PATH=/opt/kafka/bin
+DAEMON_NAME=kafka
+# Check that networking is up.
+#[ ${NETWORKING} = "no" ] && exit 0
+
+PATH=$PATH:$DAEMON_PATH
+
+# See how we were called.
+case "$1" in
+  start)
+        # Start daemon.
+        pid=`ps ax | grep -i 'kafka.Kafka' | grep -v grep | awk '{print $1}'`
+        if [ -n "$pid" ]
+          then
+            echo "Kafka is already running"
+        else
+          echo "Starting $DAEMON_NAME"
+          $DAEMON_PATH/kafka-server-start.sh -daemon /opt/kafka/config/server.properties
+        fi
+        ;;
+  stop)
+        echo "Shutting down $DAEMON_NAME"
+        $DAEMON_PATH/kafka-server-stop.sh
+        ;;
+  restart)
+        $0 stop
+        sleep 2
+        $0 start
+        ;;
+  status)
+        pid=`ps ax | grep -i 'kafka.Kafka' | grep -v grep | awk '{print $1}'`
+        if [ -n "$pid" ]
+          then
+          echo "Kafka is Running as PID: $pid"
+        else
+          echo "Kafka is not Running"
+        fi
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+exit 0
+```
+
+🌟**Change the file to executable, change ownership and start the service**
+
+`sudo chmod +x /etc/init.d/kafka`\
+`sudo chown root:root /etc/init.d/kafka`\
+`sudo service kafka start` or `systemctl start kafka`\
+`sudo service kafka status` or `systemctl status kafka`
+
+
+### **Create `/etc/rc.local` to run `Kafka` and `Zookeeper` at boot time**
+
+`vim  /etc/rc.local`
+
+```sh
+#!/bin/bash
+
+# Start Kafka first
+systemctl start zookeeper
+
+# Wait for 10 seconds to allow Zookeeper to fully start
+sleep 10
+
+# Start Kafka after Zookeeper is up
+systemctl start kafka
+
+exit 0
+```
+
+`chmod +x /etc/rc.local`
+
+🌟**Now, `reboot` the system, Zookeeper and Kafka should start automatically. You can check if it's running by using after booting**
+
+`systemctl zookeeper zookeeper`\
+`systemctl status zookeeper`
+
+
