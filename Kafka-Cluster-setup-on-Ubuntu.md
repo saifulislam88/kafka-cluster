@@ -53,17 +53,17 @@ sudo mkdir -p /data/zookeeper                                                 #I
 
 ### 1. 🟡Create a Zookeeper Uniq one ID on each VM for Zookeeper | Specify Uniq an ID
 
-#`"1"` to specify Kafka-Zookeeper server #1:
+#🎯`"1"` to specify Kafka-Zookeeper server #1:
 ```sh
 echo "1" > /data/zookeeper/myid                                                                
 ```
 
-#`"2"` to specify Kafka-Zookeeper Server #2:
+#🎯`"2"` to specify Kafka-Zookeeper Server #2:
 ```sh
 echo "2" > /data/zookeeper/myid                                                                
 ```
 
-#`"3"` to specify Kafka-Zookeeper server #3:
+#🎯`"3"` to specify Kafka-Zookeeper server #3:
 ```sh
 echo "3" > /data/zookeeper/myid                                                                
 ```
