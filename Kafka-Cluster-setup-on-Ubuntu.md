@@ -334,7 +334,7 @@ exit 0
 `sudo service kafka status` or `systemctl status kafka`
 
 
-### **Create `/etc/rc.local` to run `Kafka` and `Zookeeper` at boot time**
+🌟**Create `/etc/rc.local` to run `Kafka` and `Zookeeper` daemon services at boot time**
 
 `vim  /etc/rc.local`
 
