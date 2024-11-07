@@ -151,12 +151,12 @@ exit 0
 
 - Change the file to executable, change ownership and start the service
 
-`sudo chmod +x /etc/init.d/zookeeper`
-`sudo chown root:root /etc/init.d/zookeeper`
-`sudo service zookeeper start` or `systemctl start zookeeper`
+`sudo chmod +x /etc/init.d/zookeeper`\
+`sudo chown root:root /etc/init.d/zookeeper`\
+`sudo service zookeeper start` or `systemctl start zookeeper`\
 `sudo service zookeeper status` or `systemctl status zookeeper`
 
-- 🌟Create `/etc/rc.local` to run `Zookeeper` at boot
+🌟**Create `/etc/rc.local` to run `Zookeeper` at boot**
 
 `vim  /etc/rc.local`
 
@@ -176,5 +176,5 @@ exit 0
 ```
 `chmod +x /etc/rc.local`
 
-- 🌟Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using
+🌟**Now, `reboot` the system, Zookeeper should start automatically. You can check if it's running by using**
 `systemctl status zookeeper`
