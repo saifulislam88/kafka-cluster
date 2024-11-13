@@ -156,7 +156,7 @@ sudo chmod +x /etc/init.d/zookeeper
 sudo chown root:root /etc/init.d/zookeeper
 sudo systemctl daemon-reload
 systemctl start zookeeper
-systemctl status zookeeper -pager-no
+systemctl status zookeeper --no-pager
 ```
 
 ## Step🌐6 — Kafka Configuration
@@ -334,7 +334,7 @@ sudo chmod +x /etc/init.d/kafka
 sudo chown root:root /etc/init.d/kafka
 sudo systemctl daemon-reload
 systemctl start kafka
-systemctl status kafka -pager-no
+systemctl status kafka --no-pager
 ```
 
 
@@ -361,8 +361,8 @@ exit 0
 
 🌟**Now, `reboot` the system, Zookeeper and Kafka should start automatically. You can check if it's running by using after booting**
 
-`systemctl zookeeper zookeeper`\
-`systemctl status zookeeper`
+`systemctl status kafka --no-pager`\
+`systemctl status zookeeper --no-pager`
 
 
 ### Step🌐8 — Testing the Kafka Installation
