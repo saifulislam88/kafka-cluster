@@ -102,7 +102,6 @@ server.3=zookeeper-3:2888:3888
 `vim /etc/init.d/zookeeper`
 
 ```sh
-
 #!/bin/bash
 #/etc/init.d/zookeeper
 DAEMON_PATH=/opt/kafka/bin
@@ -154,8 +153,9 @@ exit 0
 
 `sudo chmod +x /etc/init.d/zookeeper`\
 `sudo chown root:root /etc/init.d/zookeeper`\
-`sudo service zookeeper start` or `systemctl start zookeeper`\
-`sudo service zookeeper status` or `systemctl status zookeeper`
+`sudo systemctl daemon-reload`\
+`systemctl start zookeeper` OR `sudo service zookeeper start`\
+ `systemctl status zookeeper`  OR `sudo service zookeeper status`
 
 
 ## Step🌐6 — Kafka Configuration
