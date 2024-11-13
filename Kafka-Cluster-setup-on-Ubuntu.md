@@ -151,12 +151,13 @@ exit 0
 
 🌟**Change the file to executable, change ownership and start the service**
 
-`sudo chmod +x /etc/init.d/zookeeper`\
-`sudo chown root:root /etc/init.d/zookeeper`\
-`sudo systemctl daemon-reload`\
-`systemctl start zookeeper` OR `sudo service zookeeper start`\
- `systemctl status zookeeper`  OR `sudo service zookeeper status`
-
+```sh
+sudo chmod +x /etc/init.d/zookeeper
+sudo chown root:root /etc/init.d/zookeeper
+sudo systemctl daemon-reload
+systemctl start zookeeper
+systemctl status zookeeper -pager-no
+```
 
 ## Step🌐6 — Kafka Configuration
 
@@ -328,10 +329,13 @@ exit 0
 
 🌟**Change the file to executable, change ownership and start the service**
 
-`sudo chmod +x /etc/init.d/kafka`\
-`sudo chown root:root /etc/init.d/kafka`\
-`sudo service kafka start` or `systemctl start kafka`\
-`sudo service kafka status` or `systemctl status kafka`
+```sh
+sudo chmod +x /etc/init.d/kafka
+sudo chown root:root /etc/init.d/kafka
+sudo systemctl daemon-reload
+systemctl start kafka
+systemctl status kafka -pager-no
+```
 
 
 ### Step🌐7 — **Create `/etc/rc.local` to run `Kafka` and `Zookeeper` daemon services at boot time**
