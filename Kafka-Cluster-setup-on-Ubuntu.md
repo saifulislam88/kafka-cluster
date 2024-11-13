@@ -366,3 +366,42 @@ exit 0
 
 
 ### Step🌐8 — Testing the Kafka Installation
+
+🌟**Create a Topic**
+
+```sh
+/opt/kafka/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+```
+
+🌟**Verify that the topic has been created**
+
+```sh
+/opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+```
+
+🌟**Produce a Message to the Topic**
+
+```sh
+/opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test-topic
+```
+Once this command is executed, you should be able to type messages into the console. Each line you type will be sent as a message to the Kafka topic.\
+**Hello, Kafka!**\
+**This is a test message.**
+
+🌟**Consume the Message from the Topic**
+
+```sh
+/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --from-beginning
+```
+
+You should see the messages you produced, including:
+**Hello, Kafka!**\
+**This is a test message.**
+
+🌟**Verify Logs for Errors (if any)**
+
+```sh
+tail -f /opt/kafka/logs/server.log
+tail -f /opt/kafka/logs/zookeeper.out
+tail -f /opt/kafka/logs/zookeeper-gc.log
+```
