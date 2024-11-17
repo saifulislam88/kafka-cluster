@@ -385,8 +385,11 @@ exit 0
 /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test-topic
 ```
 Once this command is executed, you should be able to type messages into the console. Each line you type will be sent as a message to the Kafka topic.\
-**Hello, Kafka!**\
-**This is a test message.**
+
+> **`Hello, Kafka!`**\
+> **`This is a test message.`**
+
+**`Ctrl C for Exit`**
 
 🌟**Consume the Message from the Topic**
 
@@ -395,6 +398,7 @@ Once this command is executed, you should be able to type messages into the cons
 ```
 
 You should see the messages you produced, including:
+
 **Hello, Kafka!**\
 **This is a test message.**
 
