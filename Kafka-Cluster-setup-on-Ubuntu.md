@@ -409,3 +409,22 @@ tail -f /opt/kafka/logs/server.log
 tail -f /opt/kafka/logs/zookeeper.out
 tail -f /opt/kafka/logs/zookeeper-gc.log
 ```
+
+---
+
+### Step🌐9 — Kafka integration with Applications
+
+- Key Information You Need to Provide to the Developers
+
+  **1. Kafka Broker URL(s)**
+  Kafka clients (producers and consumers) need to know the broker URL(s) to connect to the Kafka cluster. This typically includes:
+
+  - The hostname or IP address of one or more Kafka broker nodes.
+  - The port that Kafka is listening on (default is 9092).
+
+    Example Kafka Broker URL:
+    
+    ```sh
+    kafka-1:9092,kafka-2:9092,kafka-3:9092
+    ```
+**Note:** The above method for integrating Kafka with applications should be used if the Kafka cluster is set up **without** `Kafka REST Proxy` and `Kafka Schema Registry`.
