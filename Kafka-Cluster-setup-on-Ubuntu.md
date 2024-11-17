@@ -450,17 +450,14 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
   SSL certificates, SASL credentials, and ACL permissions
 
   **Example security info:**
-  
   ```
-  plaintext
-  Copy code
   SSL enabled: true
   SASL mechanism: SCRAM-SHA-256
   User: dev_user
   Password: dev_password
   ```
 
-  **4. Kafka Connection Configuration from Application Code**
+  **4. Kafka Connection Configuration for Application server**
 
   Provide developers with the necessary configuration for the Kafka client. Depending on the programming language or Kafka client library they're using, the config will differ slightly. Here's an example in a generic   
   format:
@@ -477,15 +474,25 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
       // Create a producer
       KafkaProducer<String, String> producer = new KafkaProducer<>(props);
       ```
-  - **For Python** (using confluent-kafka-python):
-      ```
-      from confluent_kafka import Producer
+   
+  **5. Kafka Producer Configuration**
+  
+  - **For Python**
 
+      ```
+      from confluent_kafka import Consumer
+      
       conf = {
-          'bootstrap.servers': 'kafka-1:9092,kafka-2:9092,kafka-3:9092:9092',
-          'client.id': 'my_producer',
-          'security.protocol': 'PLAINTEXT',  # Or 'SSL' if SSL is enabled
+          'bootstrap.servers': 'kafka-broker1.example.com:9092',
+          'group.id': 'user-events-consumer',
+          'auto.offset.reset': 'earliest',
+          'security.protocol': 'SASL_SSL',
+          'sasl.mechanism': 'SCRAM-SHA-256',
+          'sasl.username': 'dev_user',
+          'sasl.password': 'dev_password',
       }
       
-      producer = Producer(conf)
+      consumer = Consumer(conf)
+      consumer.subscribe(['user-events'])
       ```
+
