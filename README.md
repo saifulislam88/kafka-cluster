@@ -55,22 +55,22 @@ Kafka offers two main ways to configure a cluster: **ZooKeeper** and **KRaft** (
 ---
 ### Asking Confused Questions |💡| BraninStromning❓
 
-- Q. Can a Developer Create Topics from the Application Code?
+- Q. Can a Developer Create Topics from the Application Code ?
 
     **Yes,** developers can create topics from their application code using KafkaAdminClient in Java or other client libraries depending on your language, although it’s not always recommended for production environments 
              due to potential for mismanagement or accidental topic creation.
   
 - Q. Understanding whether Kafka, ZooKeeper, and Schema Registry are stateful or stateless, and which of these components require a quorum for high availability ?
 
-    ## Kafka Brokers
+    #### Kafka Brokers
     - **Stateful**: Kafka brokers store messages and offsets on disk.
     - **Requires Quorum**: Kafka requires quorum for replication (to ensure fault tolerance) and leader election during partition management.
     
-    ## ZooKeeper
+    #### ZooKeeper
     - **Stateful**: ZooKeeper stores coordination metadata like broker information and leader election details.
     - **Requires Quorum**: ZooKeeper requires a quorum for consistency, distributed consensus, and fault tolerance.
     
-    ## Schema Registry
+    #### Schema Registry
     - **Stateful | Stateless**: Schema Registry is stateless in terms of handling requests but stores schemas in Kafka (which is stateful).
     - **Does Not Require Quorum**: While it relies on Kafka for storage, Schema Registry itself does not require a quorum for operations.
 
