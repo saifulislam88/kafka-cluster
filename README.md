@@ -74,11 +74,10 @@ Kafka offers two main ways to configure a cluster: **ZooKeeper** and **KRaft** (
     - **Stateful | Stateless**: Schema Registry is stateless in terms of handling requests but stores schemas in Kafka (which is stateful).
     - **Does Not Require Quorum**: While it relies on Kafka for storage, Schema Registry itself does not require a quorum for operations.
 
----
 
 
-    | Component       | Stateful or Stateless?                       | Requires Quorum?                                                         |
-    |-----------------|----------------------------------------------|--------------------------------------------------------------------------|
-    | Kafka Brokers   | Stateful (stores message data)               | Requires quorum for replication and leader election.                     |
-    | ZooKeeper       | Stateful (stores coordination metadata)      | Requires quorum for distributed consensus and fault tolerance.           |
+    | Component       | Stateful or Stateless?                        | Requires Quorum?                                                         |
+    |-----------------|-----------------------------------------------|--------------------------------------------------------------------------|
+    | Kafka Brokers   | Stateful (stores message data)                | Requires quorum for replication and leader election.                     |
+    | ZooKeeper       | Stateful (stores coordination metadata)       | Requires quorum for distributed consensus and fault tolerance.           |
     | Schema Registry | Stateless (depends on Kafka for storage)      | Does not require quorum but depends on the Kafka cluster's availability. |
