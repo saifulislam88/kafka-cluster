@@ -52,9 +52,10 @@ Kafka offers two main ways to configure a cluster: **ZooKeeper** and **KRaft** (
 - **Use KRaft** for **new Kafka deployments** to simplify your architecture and take advantage of better scalability and performance.
 
 
-
+---
 ### Asking Confused Questions |💡| BraninStromning❓
 
 - Q. Can a Developer Create Topics from the Application Code?
 
-**Yes,** developers can create topics from their application code using KafkaAdminClient in Java or other client libraries depending on your language, although it’s not always recommended for production environments due to potential for mismanagement or accidental topic creation.
+    **Yes,** developers can create topics from their application code using KafkaAdminClient in Java or other client libraries depending on your language, although it’s not always recommended for production environments 
+             due to potential for mismanagement or accidental topic creation.
