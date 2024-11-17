@@ -79,3 +79,13 @@ Kafka offers two main ways to configure a cluster: **ZooKeeper** and **KRaft** (
     #### Schema Registry
     - **Stateful | Stateless**: Schema Registry is stateless in terms of handling requests but stores schemas in Kafka (which is stateful).
     - **Does Not Require Quorum**: While it relies on Kafka for storage, Schema Registry itself does not require a quorum for operations.
+
+- Q. What is a Kafka Consumer Group?
+ 
+- Q. Why Do we Need a Consumer Group?
+
+  - **Parallelism:** Kafka allows you to horizontally scale consumers by adding more instances to the consumer group. Each consumer in the group will read from different partitions of the topic.
+  - **Fault Tolerance:** If one consumer fails, another consumer in the same group can take over its partitions. Kafka ensures that each message in a partition is consumed by exactly one consumer at a time in the group.
+  - **Offset Management:** Consumer groups also manage offsets. Kafka stores the offset of each consumer group in the Kafka topic, so consumers can pick up where they left off.
+- Q. Where to Configure the Consumer Group?
+   The consumer group is typically set in the client configuration, specifically in the group.id field of the consumer configuration.
