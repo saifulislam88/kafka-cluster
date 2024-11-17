@@ -7,7 +7,7 @@
 <img src=https://github.com/user-attachments/assets/4edb6f66-b516-4e43-9ea4-535b8cb1c45e width="800" height="250"/>
 
 
-Pre-requisites
+### **Pre-requisites**
 - Kafka latest package
 - Ubuntu VMs(3 nodes)
 - Root Access
