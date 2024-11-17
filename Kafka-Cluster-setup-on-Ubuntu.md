@@ -416,15 +416,76 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
 
 - Key Information You Need to Provide to the Developers
 
-  **1. Kafka Broker URL(s)**
+  **1. Kafka Broker URL(s)**\
   Kafka clients (producers and consumers) need to know the broker URL(s) to connect to the Kafka cluster. This typically includes:
 
   - The hostname or IP address of one or more Kafka broker nodes.
   - The port that Kafka is listening on (default is 9092).
 
-    Example Kafka Broker URL:
+    **Example Kafka Broker URL:**
     
     ```sh
     kafka-1:9092,kafka-2:9092,kafka-3:9092
     ```
-**Note:** The above method for integrating Kafka with applications should be used if the Kafka cluster is set up **without** `Kafka REST Proxy` and `Kafka Schema Registry`.
+  **Note:** The above method for integrating Kafka with applications should be used if the Kafka cluster is set up **without** `Kafka REST Proxy` and `Kafka Schema Registry`.
+
+
+  **2. Topic Names**\
+  Kafka clients need to know the topic(s) they’ll be producing or consuming messages to/from. If your developers have specific topics in mind, provide them with the list of topics that have been created, or allow them to 
+  create new topics.
+
+  **View running kafka topic**
+  ```sh
+  /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+  ```
+  **Example:**
+  
+  ```
+  test-topic
+  user-events
+  payment-transactions
+  ```
+
+  **3. Security and Authentication Details (if applicable)**\
+  SSL certificates, SASL credentials, and ACL permissions
+
+  **Example security info:**
+  
+  ```
+  plaintext
+  Copy code
+  SSL enabled: true
+  SASL mechanism: SCRAM-SHA-256
+  User: dev_user
+  Password: dev_password
+  ```
+
+  **4. Kafka Connection Configuration from Application Code**
+
+  Provide developers with the necessary configuration for the Kafka client. Depending on the programming language or Kafka client library they're using, the config will differ slightly. Here's an example in a generic   
+  format:
+
+  - **For Java** (using org.apache.kafka.clients.producer.KafkaProducer):
+ 
+      ```
+      Properties props = new Properties();
+      props.put("bootstrap.servers", "kafka-1:9092,kafka-2:9092,kafka-3:9092");
+      props.put("acks", "all");
+      props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+      props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+      
+      // Create a producer
+      KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+      ```
+  - **For Python** (using confluent-kafka-python):
+      ```
+      from confluent_kafka import Producer
+
+      conf = {
+          'bootstrap.servers': 'kafka-1:9092,kafka-2:9092,kafka-3:9092:9092',
+          'client.id': 'my_producer',
+          'security.protocol': 'PLAINTEXT',  # Or 'SSL' if SSL is enabled
+      }
+      
+      producer = Producer(conf)
+      ```
