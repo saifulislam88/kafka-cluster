@@ -1,5 +1,9 @@
 ## 3-Broker Kafka Multi-Node Cluster with Zookeeper on Ubuntu 24
 
+<img src=https://github.com/user-attachments/assets/a11a8870-c157-466e-adcf-7ce0707c63b6 width="500" height="300"/>
+<img src=https://github.com/user-attachments/assets/4edb6f66-b516-4e43-9ea4-535b8cb1c45e width="500" height="300"/>
+
+
 Pre-requisites
 - Kafka latest package
 - Ubuntu VMs(3 nodes)
@@ -457,7 +461,7 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
   Password: dev_password
   ```
 
-  **4. Kafka Connection Configuration for Application server**
+  **4. Kafka Producer Connection Configuration | Java Application**
 
   Provide developers with the necessary configuration for the Kafka client. Depending on the programming language or Kafka client library they're using, the config will differ slightly. Here's an example in a generic   
   format:
@@ -475,7 +479,7 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
       KafkaProducer<String, String> producer = new KafkaProducer<>(props);
       ```
    
-  **5. Kafka Producer Configuration**
+  **5. Kafka Consumer Configuration**
   
   - **For Python**
 
@@ -496,3 +500,6 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
       consumer.subscribe(['user-events'])
       ```
 
+
+https://github.com/saifulislam88/KafkaClusterSetupAndMonitoring\
+https://www.cloudduggu.com/kafka/introduction/
