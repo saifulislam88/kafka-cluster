@@ -2,9 +2,9 @@
 
 
 
-
-
-
+- Kafka Streams
+- Kafka REST Proxy 
+- Kafka Consumer Group and Offset Management
 
 
 ### Kafka Cluster Configuration Methods: ZooKeeper vs KRaft
