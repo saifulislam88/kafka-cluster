@@ -26,6 +26,8 @@ Since we are creating `3` Ubuntu Servers with custom hostnames for kafka and zoo
 192.168.100.103  zookeeper-3.tallykhata.com                zookeeper-3
 ```
 
+<img src=https://github.com/user-attachments/assets/eee57da9-1491-4e42-931d-3c8a9b54722b width="800" height="250"/>
+
 
 ### Step🌐2 — Install latest Java(OpenJDK) and Disable RAM Swap
 
@@ -506,3 +508,4 @@ tail -f /opt/kafka/logs/zookeeper-gc.log
 
 https://github.com/saifulislam88/KafkaClusterSetupAndMonitoring\
 https://www.cloudduggu.com/kafka/introduction/
+https://amsayed.medium.com/apache-kafka-architecture-real-time-cdc-and-python-integration-1846f5e49b39
