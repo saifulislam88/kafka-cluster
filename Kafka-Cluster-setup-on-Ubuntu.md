@@ -1,7 +1,7 @@
 ## 3-Broker Kafka Multi-Node Cluster with Zookeeper on Ubuntu 24
 
-<img src=https://github.com/user-attachments/assets/a11a8870-c157-466e-adcf-7ce0707c63b6 width="800" height="300"/>\
-<img src=https://github.com/user-attachments/assets/4edb6f66-b516-4e43-9ea4-535b8cb1c45e width="800" height="300"/>
+<img src=https://github.com/user-attachments/assets/a11a8870-c157-466e-adcf-7ce0707c63b6 width="800" height="200"/>\
+<img src=https://github.com/user-attachments/assets/4edb6f66-b516-4e43-9ea4-535b8cb1c45e width="800" height="200"/>
 
 
 Pre-requisites
